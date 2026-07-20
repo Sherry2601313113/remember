@@ -1,5 +1,3 @@
-# remember
-一个离线优先的中文背诵辅助网站，结合遗忘曲线、错题记录与随机抽查，让每一次复习都更有针对性。
 # 背书计划 · Recall Studio
 
 > 一个离线优先的中文背诵辅助网站，结合遗忘曲线、错题记录与随机抽查，让每一次复习都更有针对性。
@@ -77,14 +75,14 @@ data/
 
 ```json
 {
-  "title": "书名",
-  "description": "章节/类型",
+  "title": "学校体育学",
+  "description": "体育基础概念与理论知识",
   "categories": ["简答", "论述", "名词解释"],
   "items": [
     {
-      "id": "1",
+      "id": "sports-definition",
       "category": "名词解释",
-      "question": "什么是体育?",
+      "question": "什么是体育？",
       "answer": "体育是以身体练习为基本手段……"
     }
   ]
@@ -106,6 +104,8 @@ data/
 data/learning-progress.json
 ```
 
+该文件包含个人学习记录。发布到公开仓库前，建议不要提交真实学习数据；可以保留空白模板，或将该文件加入 `.gitignore`。网站内的“导出学习记录”也可生成 JSON 备份。
+
 ## 项目结构
 
 ```text
@@ -120,7 +120,13 @@ data/learning-progress.json
 └── data/                   # 题库与个人学习数据
 ```
 
+## 发布到 GitHub 前
+
+1. 确认 `data/learning-progress.json` 中不含个人学习记录。
+2. 如有截图，将其放入 `docs/images/` 并更新“预览”部分。
+3. 选择并添加开源许可证（如 MIT License）。
+4. 提交代码后，在仓库的 **About** 中填写简介与标签，例如 `flashcards`、`spaced-repetition`、`study-tool`、`chinese`。
 
 ## License
 
- [MIT License](https://choosealicense.com/licenses/mit/) 
+暂未指定许可证。公开发布前建议添加 [MIT License](https://choosealicense.com/licenses/mit/) 或符合你使用需求的许可证。

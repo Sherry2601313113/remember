@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10243f" />
+    <title>背书计划 · 遗忘曲线复习</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="category.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#"><span class="brand-mark">忆</span><span>背书计划<small>RECALL STUDIO</small></span></a>
+
+        <nav class="nav" aria-label="主导航">
+          <button class="nav-item active" data-view="today"><span>◷</span> 今日任务 <b id="dueBadge">0</b></button>
+          <button class="nav-item" data-view="books"><span>▤</span> 我的书本</button>
+          <button class="nav-item" data-view="review"><span>⌁</span> 随机抽查</button>
+          <button class="nav-item" data-view="stats"><span>◌</span> 学习统计</button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="local-time"><span>本地时间</span><strong id="clock">--:--</strong><small id="dateText">--</small></div>
+          <button class="quiet-button" id="exportBtn">导出学习记录</button>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section id="today" class="view active">
+          <header class="page-header">
+            <div><p class="eyebrow" id="greeting">今天也要稳稳记住</p><h1>今日复习</h1><p class="subtle" id="todayDescription">按遗忘曲线安排，及时巩固正在淡去的记忆。</p></div>
+            <div class="streak"><span>连续学习</span><strong id="streakDays">0</strong><small>天</small></div>
+          </header>
+
+          <div class="summary-grid">
+            <article class="summary-card emphasis"><span>待复习</span><strong id="dueCount">0</strong><small>现在开始，给记忆加固</small></article>
+            <article class="summary-card"><span>今日完成</span><strong id="todayDone">0</strong><small>每一次回忆都算数</small></article>
+            <article class="summary-card"><span>已掌握</span><strong id="masteredCount">0</strong><small>跨过 4 次成功复习</small></article>
+          </div>
+
+          <div class="study-layout">
+            <section class="task-panel">
+              <div class="section-heading"><div><p class="eyebrow">NEXT UP</p><h2 id="taskTitle">准备好开始了吗？</h2></div><button class="outline-button" id="skipBtn">换一题</button></div>
+              <div class="card-stage" id="cardStage">
+                <div class="empty-state"><span class="empty-icon">✓</span><h3>今天的复习已经完成</h3><p>可以去随机抽查，或从书本中开始新的内容。</p><button class="primary-button" data-go-view="books">选择书本</button></div>
+              </div>
+            </section>
+            <aside class="method-panel">
+              <p class="eyebrow">MEMORY RHYTHM</p><h2>遗忘曲线</h2>
+              <p>记住后会在关键节点再次出现；遗忘会缩短间隔，帮助你重点巩固。</p>
+              <ol class="timeline"><li><b>第 1 次</b><span>今天</span></li><li><b>第 2 次</b><span>1 天后</span></li><li><b>第 3 次</b><span>3 天后</span></li><li><b>第 4 次</b><span>7 天后</span></li><li><b>长期记忆</b><span>15 / 30 天后</span></li></ol>
+            </aside>
+          </div>
+        </section>
+
+        <section id="books" class="view">
+          <header class="page-header compact"><div><p class="eyebrow">YOUR LIBRARY</p><h1>我的书本</h1><p class="subtle">每本书对应一个 JSON 题库文件，可随时导入更新。</p></div><label class="primary-button file-label">导入题库<input id="fileInput" type="file" accept="application/json,.json" /></label></header>
+          <div class="book-grid" id="bookGrid"></div>
+          <section class="format-note"><h3>题库文件格式</h3><p>每本书都分为“简答”“论述”“名词解释”三类。编辑 <code>data/book-1.json</code>、<code>data/book-2.json</code>、<code>data/book-3.json</code> 后刷新即可；每道题必须标注 <code>category</code>。</p><pre>{
+  "title": "第一本书",
+  "categories": ["简答", "论述", "名词解释"],
+  "items": [{ "id": "唯一编号", "category": "简答", "question": "题目", "answer": "答案" }]
+}</pre></section>
+        </section>
+
+        <section id="review" class="view">
+          <header class="page-header compact"><div><p class="eyebrow">WEAKNESS-FIRST</p><h1>随机抽查</h1><p class="subtle">从所有已学习内容中抽取题目；遗忘次数越多，出现概率越高。</p></div></header>
+          <div class="review-intro"><span>⌁</span><div><h2>来一次真正的回忆测试</h2><p id="reviewAvailability">先完成至少一道学习内容，即可开始抽查。</p></div><button class="primary-button" id="startReviewBtn">开始抽查</button></div>
+          <div class="card-stage review-card" id="reviewStage"></div>
+        </section>
+
+        <section id="stats" class="view">
+          <header class="page-header compact"><div><p class="eyebrow">YOUR PROGRESS</p><h1>学习统计</h1><p class="subtle">让复习安排随着你的真实掌握情况变化。</p></div></header>
+          <div class="stats-grid" id="statsGrid"></div>
+          <section class="activity-panel"><div class="section-heading"><div><p class="eyebrow">RECENT ACTIVITY</p><h2>最近学习记录</h2></div></div><div id="activityList" class="activity-list"></div></section>
+        </section>
+      </section>
+    </main>
+    <template id="questionTemplate">
+      <article class="question-card">
+        <div class="card-meta"><span class="book-pill"></span><span class="review-label"></span></div>
+        <p class="question-text"></p>
+        <div class="answer-wrap hidden"><span>答案</span><p class="answer-text"></p></div>
+        <div class="card-actions"><button class="reveal-button">显示答案</button><div class="grade-actions hidden"><button class="forget-button">我忘记了 <small>缩短复习间隔</small></button><button class="remember-button">我记住了 <small>安排下一次复习</small></button></div></div>
+      </article>
+    </template>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+.category-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}.category-button{border:1px solid #dbe2eb;background:#fbfcff;border-radius:50px;color:#58677e;padding:5px 8px;cursor:pointer;font:11px inherit}.category-button:hover{border-color:var(--book-color);color:var(--book-color)}
