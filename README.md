@@ -18,11 +18,8 @@
 
 ## 预览
 
-启动后访问 `http://127.0.0.1:3210`。如需为仓库添加截图，建议将图片放入 `docs/images/`，并在此处替换为：
+<img width="1782" height="1271" alt="image" src="https://github.com/user-attachments/assets/2bdd7cd6-0ec0-48e9-9b98-870d95f33cd9" />
 
-```md
-![今日复习界面](docs/images/today.png)
-```
 
 ## 快速开始
 
@@ -75,15 +72,15 @@ data/
 
 ```json
 {
-  "title": "学校体育学",
-  "description": "体育基础概念与理论知识",
+  "title": "书本",
+  "description": "简介",
   "categories": ["简答", "论述", "名词解释"],
   "items": [
     {
-      "id": "sports-definition",
-      "category": "名词解释",
-      "question": "什么是体育？",
-      "answer": "体育是以身体练习为基本手段……"
+      "id": "",
+      "category": "",
+      "question": "",
+      "answer": ""
     }
   ]
 }
@@ -104,7 +101,6 @@ data/
 data/learning-progress.json
 ```
 
-该文件包含个人学习记录。发布到公开仓库前，建议不要提交真实学习数据；可以保留空白模板，或将该文件加入 `.gitignore`。网站内的“导出学习记录”也可生成 JSON 备份。
 
 ## 项目结构
 
@@ -120,13 +116,22 @@ data/learning-progress.json
 └── data/                   # 题库与个人学习数据
 ```
 
-## 发布到 GitHub 前
+## 🤖 AI 披露
 
-1. 确认 `data/learning-progress.json` 中不含个人学习记录。
-2. 如有截图，将其放入 `docs/images/` 并更新“预览”部分。
-3. 选择并添加开源许可证（如 MIT License）。
-4. 提交代码后，在仓库的 **About** 中填写简介与标签，例如 `flashcards`、`spaced-repetition`、`study-tool`、`chinese`。
+本项目在开发中使用了 AI 辅助工具。
+
+*   **AI 使用级别**: `assist` (AI协助完成部分任务)
+*   **应用阶段**:
+    *   `implementation`: 在 AI 辅助下编写了部分核心算法和单元测试。
+    *   `documentation`: 使用 AI 草拟了 API 文档和 README 初稿。
+*   **使用的模型**:
+    | 用途 | 模型/工具 |
+    | :--- | :--- |
+    | 代码生成与辅助 | OpenAI Codex GPT-5.6 SOL|
+    | 文档起草与编辑 | OpenAI GPT-5.6 SOL |
+
+
 
 ## License
 
-暂未指定许可证。公开发布前建议添加 [MIT License](https://choosealicense.com/licenses/mit/) 或符合你使用需求的许可证。
+ [MIT License](https://choosealicense.com/licenses/mit/) 
